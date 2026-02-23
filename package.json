@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "name": "api-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "esbuild": "^0.27.3",
+    "fastify": "^5.7.4",
+    "get-tsconfig": "^4.13.6",
+    "resolve-pkg-maps": "^1.0.0",
+    "undici-types": "^7.18.2"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "William Thomas",
+  "license": "ISC",
+  "type": "module"
+}
