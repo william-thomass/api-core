@@ -1,0 +1,10 @@
+ services:
+  postgresql:
+    container_name: api-core
+    ports:
+      - "5432:5432"
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USERNAME=postgresql
+      - POSTGRESQL_PASSWORD=postgresql
+      - POSTGRESQL_DATABASE=core
