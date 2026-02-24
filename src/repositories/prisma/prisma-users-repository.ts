@@ -1,0 +1,42 @@
+
+
+import { prisma } from "../../lib/prisma.js";
+import {type User}  from "../../lib/prisma/client.js";
+import type { UserCreateInput } from "../../lib/prisma/models.js";
+import type { usersRepository } from "../users-repository.js";
+
+
+export class PrismaUsersRepository implements usersRepository{
+ async create(data: UserCreateInput): Promise<User> {
+    const user = await prisma.user.create({data})
+
+    return user
+  }
+
+ async findById(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where:{
+        id,
+      }
+    })
+
+    if(!user){
+      return null
+    }
+
+    return user
+  }
+ async findByEmail(email: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where:{
+        email,
+      }
+    })
+    if(!user){
+      return null
+    }
+
+    return user
+  }
+
+}
