@@ -1,6 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import z, { ZodError } from "zod";
+import z from "zod";
 import { MakeRegisterUsers } from "../../use-case/factories/make-register-user.js";
+import { verifyError } from "../../utils/errors.js";
 
 export async function registerUserController(req: FastifyRequest, res:FastifyReply){
   const bodySchema = z.object({
@@ -24,13 +25,6 @@ export async function registerUserController(req: FastifyRequest, res:FastifyRep
 
     res.status(201).send(user)
   } catch (error) {
-    if(error instanceof ZodError){
-      res.status(400).send({message:error.message, issues:error.format()})
-    }
-    if(error instanceof Error){
-      res.status(400).send({message:error.message})
-    }
-
-    res.status(500).send("Server Internal Error")
+    verifyError(res, error)
   }
 }
