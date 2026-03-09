@@ -13,12 +13,19 @@ export async function authenticateUserController(req: FastifyRequest , res:Fasti
     const { email, password} = bodySchema.parse(req.body)
 
     const makeAuthenticate = MakeAuthenticateUsers()
-    await makeAuthenticate.execute({
+    const { user } = await makeAuthenticate.execute({
       email,
       password
     })
 
-    res.status(200).send({message:"Logado com sucesso"})
+    const token = await res.jwtSign({},{
+      sign:{
+        sub:user.id,
+        expiresIn:"7d"
+      }
+    })
+
+    res.status(200).send({token})
 
 
   } catch (error) {

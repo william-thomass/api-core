@@ -4,6 +4,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development","production","test"]).default("development"),
   PORT: z.coerce.number().default(3333),
   DATABASE_URL:z.string().url(),
+  SECRET_JWT:z.string()
 })
 
 const _env = envSchema.safeParse(process.env)
